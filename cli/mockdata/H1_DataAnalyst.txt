@@ -1,0 +1,17 @@
+Real snapshot summary: DataAnalyst
+
+Source snapshot: reference_pipeline_snapshot
+Sample: s255
+Total cells: 137,654
+Biomarkers: 42
+Cell types: 11
+
+Top cell types:
+- Proximal Tubules: 48,910 (35.53%)
+- Distal Tubules: 26,057 (18.93%)
+- Endothelial cells: 12,909 (9.38%)
+- Basement membrane: 11,642 (8.46%)
+- VSMCs: 10,557 (7.67%)
+
+Full mock-mode display data now lives in:
+cli/mockdata/reference_pipeline_snapshot/display_summary.json

@@ -1,0 +1,13 @@
+Conclusion: FALSIFIED
+
+The real snapshot supports proximal tubule density loss and Collagen IV increase, but does not support concurrent aSMA upregulation or the proposed late-stage hidden-damage signature.
+
+Key Evidence
+- proximal_tubule_density: supported after FDR correction (p = 0.0011, beta = -3.9270).
+- collagen_IV_expression: supported after FDR correction (p = 0.0039, beta = 29.0354).
+- aSMA_expression: not supported after FDR correction (p = 0.0674, beta = -25.9921).
+- pt_hidden_damage_signature: not supported after FDR correction (p = 0.7072, beta = -0.2720).
+
+Full validation outputs:
+cli/mockdata/reference_pipeline_snapshot/validation_report.md
+cli/mockdata/reference_pipeline_snapshot/validation_results.json

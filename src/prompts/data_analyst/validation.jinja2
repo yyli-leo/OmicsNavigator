@@ -1,0 +1,36 @@
+Review the following spatial omics analysis report for completeness:
+
+```
+{{ analysis_report }}
+```
+
+**Tier 1: Required Metrics (Must Present for Validation to Pass)**
+
+Check if the report includes ALL of the following:
+
+1. **Global Metadata Section**:
+   - Explicit Total Cell Count (e.g., "N = 125,430" or "Total Cell Count: 125,430")
+   - List of Available Biomarkers (mentions markers/biomarkers)
+   - List of Available Cell Types (mentions cell types)
+
+2. **Cellular Composition Section**:
+   - Table with cell types showing BOTH:
+     - Absolute counts (e.g., "48,910")
+     - Relative percentages (e.g., "35.53%")
+
+3. **Molecular Dynamic Range Section**:
+   - Percentile distributions (at minimum: Min, Median, Max)
+   - Table format or clear listing by marker
+
+**Tier 2: Optional (NOT Required for Pass)**
+- Biological insights
+- Actionable recommendations
+
+**Validation Logic:**
+- If ALL Tier 1 metrics (1, 2, 3) are present → **VALID**
+- If ANY Tier 1 metric is missing → **IMPROVEMENT_NEEDED**
+
+**Output Format:**
+Respond with one of:
+- **VALID**: Analysis meets all Tier 1 requirements
+- **IMPROVEMENT_NEEDED**: [List only missing Tier 1 elements]

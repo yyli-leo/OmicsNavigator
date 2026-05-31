@@ -1,0 +1,4 @@
+{
+  "roi_key": "('s255_c001_v001_r001_reg009', '1765-1893-3696-3824')",
+  "report": "1. [Blood vessel]:\n   The ROI highlights a structure with a distinct, concentric ring of cyan (aSMA) staining, characteristic of smooth muscle cells in a vascular wall, surrounding a central lumen. This is supported by the adjacent magenta (Perlecan) and gray (CollagenIV) signals that delineate the vascular basement membrane.\n\n2. [Interstitium]:\n   The surrounding area exhibits diffuse cyan (aSMA) and gray (CollagenIV) signals, which are indicative of interstitial fibrosis and myofibroblast activation common in diseased tissue.\n\nOther Notable Features:\n- Presence of yellow (CD45+) signal in the vicinity, suggesting potential inflammatory cell infiltration.\n- Evidence of structural remodeling in the surrounding tissue indicated by the irregular distribution of fibrosis markers."
+}

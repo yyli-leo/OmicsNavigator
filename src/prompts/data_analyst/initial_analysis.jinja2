@@ -1,0 +1,22 @@
+Analyze the spatial omics dataset with the following details:
+
+**Data Location:**
+- Data Root: {{ data_root }}
+- Sample ID: {{ sample_id }}
+
+**Analysis Tasks:**
+1. Inspect the data schema to understand the structure
+2. Compute percentile distributions for biomarkers
+3. Analyze cellular composition with absolute counts and relative percentages
+4. Generate molecular dynamic range report
+
+**Expected Output (Tier 1 - Required):**
+Provide a factual analysis report with:
+- **Global Metadata**: Total cell count, available biomarkers, available cell types
+- **Cellular Composition**: Table with cell types showing BOTH absolute counts AND percentages
+- **Molecular Dynamic Range**: Percentile distributions (Min, 25th, Median, 75th, 90th, 95th, 99th, Max) for key biomarkers. Do NOT include Sparsity (%) column in the report table.
+
+Focus on presenting the data accurately and clearly. Do not include biological interpretations, hypotheses, or recommendations.
+
+Use the available tools (inspect_data_schema, analyze_spatial_sample) to perform this analysis.
+If MCP tools don't provide all required metrics, use execute_analysis_script to compute them.

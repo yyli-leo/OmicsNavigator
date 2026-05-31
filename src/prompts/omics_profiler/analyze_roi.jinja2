@@ -1,0 +1,37 @@
+<context>
+{% if background_checklist %}
+{{ background_checklist }}
+{% endif %}
+</context>
+
+<roi_info>
+ROI: {{ roi_patch_name }}
+Location: Region {{ roi_region_id }}
+</roi_info>
+
+<user_input>
+Cell type composition:
+{{ roi_description }}
+</user_input>
+
+<instruction>
+Please format your response using the structure below:
+
+```
+1. [Primary Structure Name]:
+   [Supporting Evidence]
+
+(if applicable, when confidence in the primary structure is low)
+2. [Secondary Structure Name]:
+   [Supporting Evidence]
+
+[Other Notable Features]
+```
+
+**Content Guidelines:**
+- **Primary/Secondary Structure Name**: Must be chosen **strictly** from the following list:
+[Proximal tubules, Distal tubules, Glomeruli, Blood vessel, Interstitium]
+- **Supporting Evidence**: Cite specific evidence from the input characteristics to justify your inference (e.g., cell types). Please **strictly** make use of the contexts we created above and **do not** include any external knowledge.
+- **Other Notable Features**: Briefly list up to **two** additional observations or features that are relevant or unusual. Keep this section concise.
+- Do not include the placeholder names in your response, and ensure that the content is specific to the provided data. Avoid redundant repetition and use simple, concise language.
+</instruction>

@@ -1,0 +1,155 @@
+{
+  "conclusion": "FALSIFIED",
+  "confidence": 0.5,
+  "key_findings": [
+    {
+      "feature": "proximal_tubule_density",
+      "test": "Linear Mixed Model",
+      "statistic": -3.9269871159293532,
+      "p_value": 0.00028218132156280145,
+      "corrected_p_value": 0.0011287252862512058,
+      "effect_size": "β = -3.9270",
+      "interpretation": "proximal_tubule_density shows significant decreasing trend across ordinal stages (LMM, p = 0.0003, expected: monotonic_decrease)",
+      "significant": true
+    },
+    {
+      "feature": "collagen_IV_expression",
+      "test": "Linear Mixed Model",
+      "statistic": 29.035377500130007,
+      "p_value": 0.001964122443357938,
+      "corrected_p_value": 0.003928244886715876,
+      "effect_size": "β = 29.0354",
+      "interpretation": "collagen_IV_expression shows significant increasing trend across ordinal stages (LMM, p = 0.0020, expected: monotonic_increase)",
+      "significant": true
+    },
+    {
+      "feature": "aSMA_expression",
+      "test": "Linear Mixed Model",
+      "statistic": -25.992060342400084,
+      "p_value": 0.05054792864160252,
+      "corrected_p_value": 0.06739723818880336,
+      "effect_size": "β = -25.9921",
+      "interpretation": "aSMA_expression shows not significant decreasing trend across ordinal stages (LMM, p = 0.0505, expected: monotonic_increase)",
+      "significant": false
+    },
+    {
+      "feature": "pt_hidden_damage_signature",
+      "test": "Linear Mixed Model",
+      "statistic": -0.27201296188215646,
+      "p_value": 0.7071926191055053,
+      "corrected_p_value": 0.7071926191055053,
+      "effect_size": "β = -0.2720",
+      "interpretation": "pt_hidden_damage_signature shows not significant decreasing trend across ordinal stages (LMM, p = 0.7072, expected: significant_difference)",
+      "significant": false
+    }
+  ],
+  "data_source": "full_registry",
+  "raw_statistics": {
+    "all_tests": [
+      {
+        "feature": "proximal_tubule_density",
+        "test": "Linear Mixed Model",
+        "statistic": -3.9269871159293532,
+        "p_value": 0.00028218132156280145,
+        "effect_size": "β = -3.9270",
+        "expected_trend": "monotonic_decrease",
+        "trend_direction": "decrease",
+        "significant": true,
+        "significant_after_correction": true,
+        "interpretation": "proximal_tubule_density shows significant decreasing trend across ordinal stages (LMM, p = 0.0003, expected: monotonic_decrease)",
+        "n_rois": 1000,
+        "phenotype_counts": {
+          "DM": 416,
+          "DKD2B": 232,
+          "DKD2A->B": 180,
+          "DKD2A": 120,
+          "DKD3": 52
+        },
+        "corrected_p_value": 0.0011287252862512058
+      },
+      {
+        "feature": "collagen_IV_expression",
+        "test": "Linear Mixed Model",
+        "statistic": 29.035377500130007,
+        "p_value": 0.001964122443357938,
+        "effect_size": "β = 29.0354",
+        "expected_trend": "monotonic_increase",
+        "trend_direction": "increase",
+        "significant": true,
+        "significant_after_correction": true,
+        "interpretation": "collagen_IV_expression shows significant increasing trend across ordinal stages (LMM, p = 0.0020, expected: monotonic_increase)",
+        "n_rois": 1000,
+        "phenotype_counts": {
+          "DM": 416,
+          "DKD2B": 232,
+          "DKD2A->B": 180,
+          "DKD2A": 120,
+          "DKD3": 52
+        },
+        "corrected_p_value": 0.003928244886715876
+      },
+      {
+        "feature": "aSMA_expression",
+        "test": "Linear Mixed Model",
+        "statistic": -25.992060342400084,
+        "p_value": 0.05054792864160252,
+        "effect_size": "β = -25.9921",
+        "expected_trend": "monotonic_increase",
+        "trend_direction": "decrease",
+        "significant": false,
+        "significant_after_correction": false,
+        "interpretation": "aSMA_expression shows not significant decreasing trend across ordinal stages (LMM, p = 0.0505, expected: monotonic_increase)",
+        "n_rois": 1000,
+        "phenotype_counts": {
+          "DM": 416,
+          "DKD2B": 232,
+          "DKD2A->B": 180,
+          "DKD2A": 120,
+          "DKD3": 52
+        },
+        "corrected_p_value": 0.06739723818880336
+      },
+      {
+        "feature": "pt_hidden_damage_signature",
+        "test": "Linear Mixed Model",
+        "statistic": -0.27201296188215646,
+        "p_value": 0.7071926191055053,
+        "effect_size": "β = -0.2720",
+        "expected_trend": "significant_difference",
+        "trend_direction": "decrease",
+        "significant": false,
+        "significant_after_correction": false,
+        "interpretation": "pt_hidden_damage_signature shows not significant decreasing trend across ordinal stages (LMM, p = 0.7072, expected: significant_difference)",
+        "n_rois": 1000,
+        "phenotype_counts": {
+          "DM": 416,
+          "DKD2B": 232,
+          "DKD2A->B": 180,
+          "DKD2A": 120,
+          "DKD3": 52
+        },
+        "corrected_p_value": 0.7071926191055053
+      }
+    ],
+    "correction_applied": "fdr_bh",
+    "original_p_values": [
+      0.00028218132156280145,
+      0.001964122443357938,
+      0.05054792864160252,
+      0.7071926191055053
+    ],
+    "corrected_p_values": [
+      0.0011287252862512058,
+      0.003928244886715876,
+      0.06739723818880336,
+      0.7071926191055053
+    ]
+  },
+  "execution_log": [
+    "Loaded blueprint for hypothesis: H1",
+    "Loaded 1000 ROIs from full_registry",
+    "Mapped 4 target variables to ROI data",
+    "Executed statistical tests on 4 features",
+    "Applied fdr_bh correction"
+  ]
+}

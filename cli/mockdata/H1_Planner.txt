@@ -1,0 +1,16 @@
+Real snapshot summary: Planner
+
+Source snapshot: reference_pipeline_snapshot
+Blueprint version: 2.0
+Correction method: fdr_bh, alpha = 0.05
+Primary test: linear_mixed_model
+Fallback test: jonckheere_terpstra_test
+
+Target variables:
+- proximal_tubule_density: monotonic_decrease
+- collagen_IV_expression: monotonic_increase
+- aSMA_expression: monotonic_increase
+- pt_hidden_damage_signature: significant_difference
+
+Full blueprint:
+cli/mockdata/reference_pipeline_snapshot/blueprint.json

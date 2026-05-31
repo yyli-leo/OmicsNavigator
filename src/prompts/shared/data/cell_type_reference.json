@@ -1,0 +1,22 @@
+{
+  "proximal_tubules": {
+    "enriched": ["Tubular cells (CD183++/CD227-)"],
+    "sparse": ["Distal tubular cells (CD227+)", "Smooth muscle cells (aSMA+)"]
+  },
+  "distal_tubules": {
+    "enriched": ["Distal tubular cells (CD227+)"],
+    "sparse": ["Tubular cells (CD183++/CD227-)"]
+  },
+  "glomeruli": {
+    "enriched": ["Endothelial cells (CD31+/CD196+)", "Nestin+ cells (nestin+)"],
+    "sparse": ["Tubular cells (CD183++/CD227-)", "Distal tubular cells (CD227+)"]
+  },
+  "blood_vessel": {
+    "enriched": ["Smooth muscle cells (aSMA+)"],
+    "sparse": ["Tubular cells (CD183++/CD227-)", "Distal tubular cells (CD227+)"]
+  },
+  "interstitium": {
+    "enriched": ["Endothelial cells (CD31+/CD196+)", "Low expressing cells", "Immune cells (CD45+/CD68+/CD11b+)"],
+    "sparse": ["Tubular cells (CD183++/CD227-)", "Distal tubular cells (CD227+)"]
+  }
+}

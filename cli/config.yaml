@@ -1,0 +1,121 @@
+# OmicsNavigator CLI - Session Configuration
+
+system:
+  # The default LLM backend for orchestration and reasoning.
+  # Valid models: gemini-2.5-flash, gemini-2.5-pro, gemini-2.5-flash-lite, gemini-3.1-flash-lite
+  default_model: "gemini-3.1-flash-lite"
+  # IMPORTANT: Do not hardcode API keys here.
+  # Use environment variables (e.g., GEMINI_API_KEY) in your runtime environment.
+  api_key_env_var: "GEMINI_API_KEY"
+  # Optional HTTP/HTTPS proxy for real-mode Gemini API calls.
+  # Disabled by default. Set enabled: true and edit host/port if your network
+  # requires a local proxy.
+  proxy:
+    enabled: false
+    scheme: "http"
+    host: "127.0.0.1"
+    port: 7897
+  # Defines the verbosity of the CLI output (DEBUG, INFO, WARNING, ERROR)
+  log_level: "INFO"
+  # Maximum concurrent agent threads for parallel hypothesis validation
+  max_workers: 2
+
+  # Per-agent model overrides (all fields optional).
+  # Uncomment and edit to assign a different model/temperature to specific agents.
+  # Agents not listed here will use system.default_model.
+  # Agent names: data_analyst, literature_reviewer, planner,
+  #              visual_profiler, omics_profiler, omics_interpreter,
+  #              retriever, validator
+  agents:
+    planner:
+      model: "gemini-3.1-pro-preview"  # "gemini-3.1-flash-lite"
+    validator:
+      model: "gemini-3.1-pro-preview"
+      temperature: 0
+
+  # Execution Mode Configuration
+  execution:
+    # Default mode: "mock" or "real"
+    # Mock: Fast demo with pre-generated outputs
+    # Real: LLM-powered agents for actual analysis
+    default_mode: "mock"
+    # Allow mode switching at runtime via /mode command
+    allow_mode_switch: true
+    # Phase selection (applies to both modes)
+    # Options: "all" or comma-separated list like "1,2,3"
+    default_phases: "all"
+
+# Phase-specific Configuration
+phases:
+  phase1_planning:
+    enabled: true
+    name: "Planning & Data Analysis"
+    agents: ["DataAnalyst", "LiteratureReviewer", "Planner"]
+    timeout_seconds: 300
+
+  phase2_interpretation:
+    enabled: true
+    name: "Interpretation"
+    agents: ["VisualProfiler", "OmicsProfiler", "OmicsInterpreter"]
+    # Limit ROIs for demo purposes
+    max_rois: 50
+    timeout_seconds: 600
+    # Image scaling factor for VisualProfiler (0.0-1.0, lower = smaller/faster)
+    scale_factor: 0.05
+
+  phase3_analysis:
+    enabled: true
+    name: "Analysis"
+    agents: ["Retriever", "Validator"]
+    use_spatial_expansion: true
+    # Real mode runs Retriever and Validator against configured data.
+    timeout_seconds: 300
+
+session:
+  # Dataset/sample identifier used to resolve registry filenames such as
+  # <sample_id>_pivot_ROIs_registry.pkl
+  sample_id: "s255"
+  # Absolute or relative path to the target spatial omics dataset
+  data_path: "./data/s255/"
+  # Directory where analysis reports, plots, and intermediate states are saved
+  output_dir: "./outputs/s255_analysis/"
+
+metadata:
+  # Essential context for the LLM to understand the data dimensions
+  technology: "MIF"
+  phynotypes: "Healthy, Diabetic Mellitus, Diabetic Kidney Disease"
+  tissue: "Kidney"
+  # Region → clinical phenotype mapping (from Clinical_mappping.jsonl)
+  # Groups: DM(0), DKD2A(1), DKD2A->B(2), DKD2B+(3, includes DKD2B and DKD3)
+  clinical_mapping:
+    s255_c001_v001_r001_reg002: "DM"
+    s255_c001_v001_r001_reg003: "DKD2B"
+    s255_c001_v001_r001_reg004: "DKD2A->B"
+    s255_c001_v001_r001_reg005: "DKD3"
+    s255_c001_v001_r001_reg009: "DKD2B"
+    s255_c001_v001_r001_reg010: "DKD2B"
+    s255_c001_v001_r001_reg011: "DKD2A->B"
+    s255_c001_v001_r001_reg012: "DM"
+    s255_c001_v001_r001_reg013: "DM"
+    s255_c001_v001_r001_reg014: "DM"
+    s255_c001_v001_r001_reg015: "DM"
+    s255_c001_v001_r001_reg016: "DKD2A"
+    s255_c001_v001_r001_reg017: "DKD2A->B"
+    s255_c001_v001_r001_reg019: "DKD2A"
+    s255_c001_v001_r001_reg020: "DM"
+    s255_c001_v001_r001_reg022: "DKD2B"
+    s255_c001_v001_r001_reg023: "DM"
+
+hypotheses:
+  # Structured list of hypotheses for automated agent validation
+  - id: "H1"
+    description: "Verify if DKD progression is characterized by a quantifiable loss of functional Proximal Tubules and a concurrent upregulation of Fibrosis Markers (CollagenIV, aSMA), specifically looking for hidden damage in late-stage tubules."
+
+# LangGraph Configuration (for real agent execution)
+langgraph:
+  # Checkpoint database for state persistence
+  checkpoint_db: "checkpoints.db"
+  # Maximum recursion depth for workflow
+  recursion_limit: 100
+  # Timeout for workflow execution (seconds)
+  timeout_seconds: 600

@@ -1,0 +1,65 @@
+Generate a comprehensive Hypothesis Verification Report based on the following statistical validation results and interpretation.
+
+DATA SOURCE:
+✓ Real ROI data from Retriever's spatial expansion was used for validation.
+
+Hypothesis:
+{{ hypothesis_description }}
+
+Statistical Summary:
+- Conclusion: {{ preliminary_conclusion }}
+- Total Tests: {{ total_tests }}
+- Significant (after correction): {{ significant_after_correction }}
+- Aligned with expected trend: {{ aligned_significant }}
+
+Detailed Test Results:
+{{ detailed_test_results }}
+
+LLM Interpretation:
+{{ llm_interpretation }}
+
+---
+
+Generate a validation report in markdown format with the following strict structure:
+
+# Hypothesis Verification Report
+
+> Conclusion: [VERIFIED / PARTIALLY VERIFIED / INCONCLUSIVE / FALSIFIED]
+>
+> [A one-to-two sentence executive summary of the main finding, strictly adhering to the statistical truth]
+
+---
+
+### 1. Key Evidence Synthesized from Statistical Facts
+
+* [Biological Feature]: [Descriptive Title]
+    * Observation: [Specific statistical finding: Test Name, FDR-corrected p-value, Coefficient/Effect Size, and ICC if applicable]
+    * Significance: [Biological interpretation of this finding. If p > 0.05, you must explicitly state that the evidence fails to support the claim.]
+
+*(Repeat for each tested feature)*
+
+---
+
+### 2. Key Scientific Discovery
+
+#### [Scientific Discovery Title]
+[Paragraph describing the key scientific insight discovered. If the result is PARTIALLY VERIFIED or INCONCLUSIVE, focus on the biological implications of this divergence (e.g., "Fibrotic decoupling" or patient-specific heterogeneity).]
+
+---
+
+### 3. Statistical Details & Guardrails
+
+* Tests Performed: [Methods used, e.g., Linear Mixed Models accounting for spatial nesting]
+* Significant Findings: [X out of Y confirmed (FDR p < 0.05)]
+* Correction Method: [Multiple testing correction method used, e.g., FDR-BH (α=0.05)]
+
+---
+
+### 4. Limitations
+
+[List limitations derived from the data context, such as patient heterogeneity or spatial resolution limits.]
+
+Formatting Requirements:
+- Use proper markdown formatting.
+- Include specific statistical values (FDR p-values, coefficients).
+- Be scientifically rigorous. Do not validate failed targets.

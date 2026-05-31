@@ -1,0 +1,4 @@
+{
+  "roi_key": "('s255_c001_v001_r001_reg009', '1893-2021-2352-2480')",
+  "report": "1. [Proximal tubules]:\n   The ROI captures a region lacking the defining green (CD227) signal of distal tubules and the red (Nestin) tuft of glomeruli. The area shows the characteristic cellular density and architectural arrangement consistent with the proximal tubule compartment, bounded by basement membrane components (magenta/gray).\n\n2. [Interstitium]:\n   The ROI shows areas of diffuse staining and structural gaps between the tubular segments, suggesting potential interstitial space.\n\nOther Notable Features:\n- The presence of diffuse magenta (Perlecan) and gray (CollagenIV) signals suggests the structural integrity of the tubular basement membranes.\n- The absence of strong cyan (aSMA) signal within this specific micro-window suggests a lack of significant localized fibrotic thickening in this immediate area."
+}

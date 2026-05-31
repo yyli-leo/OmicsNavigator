@@ -1,0 +1,26 @@
+Based on the following context, generate a VisualProfiler Background Checklist for identifying kidney tissue structures from multiplexed immunofluorescence images.
+
+## Context
+**Hypothesis:** {{ hypothesis_description }}
+
+**Dataset:** {{ dataset_context }}
+
+**Literature:** {{ literature_context }}
+
+## Task
+Generate a channel-specific visual cue checklist for these tissue structures:
+
+- Glomeruli
+- Distal Tubules / Collecting Ducts (DT/CD)
+- Proximal Tubules (PT)
+- Blood Vessels (Arteries/Arterioles)
+- Interstitium
+
+For each structure, specify:
+- **Core Signal**: Which channel/color to look for and its pattern (e.g., "Red (Nestin)+ in a reticular pattern")
+- **Boundary/Structure**: Key structural features (e.g., Bowman's capsule ring, basement membrane)
+- **Key differentiator**: What distinguishes it from similar structures
+
+Channel mapping: Nestin=red, CD227=green, CD183=blue, CD45=yellow, aSMA=cyan, Perlecan=magenta, CollagenIV=gray.
+
+Format the output as a clean markdown document starting with a title "CHECKLIST (Channel-Specific Visual Cues)".

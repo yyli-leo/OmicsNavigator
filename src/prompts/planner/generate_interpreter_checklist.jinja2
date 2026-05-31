@@ -1,0 +1,29 @@
+Based on the following context, generate an OmicsInterpreter Background Checklist for cross-modal alignment and conflict resolution.
+
+## Context
+**Hypothesis:** {{ hypothesis_description }}
+
+**Dataset:** {{ dataset_context }}
+
+**Literature:** {{ literature_context }}
+
+## Task
+Generate conflict resolution rules for the following common interpretation scenarios:
+
+1. **Glomeruli** (High Visual Reliability)
+   - Conflict Rule: When to trust visual over omics
+   - Alignment: What omics signals should confirm the visual finding
+
+2. **Blood Vessels** (Structure vs. Cell Type Disambiguation)
+   - Conflict Rule: How to distinguish blood vessels from other aSMA+ structures
+   - Alignment: What structural features must be visually confirmed
+
+3. **Interstitium vs. Proximal Tubules** (High Omics Reliability)
+   - Conflict Rule: When visual boundaries are ambiguous, trust omics
+   - Alignment: What cell composition pattern confirms interstitium
+
+4. **Proximal Tubules vs. Distal Tubules** (High Omics Reliability)
+   - Conflict Rule: How to differentiate PT from DT using omics
+   - Alignment: Key biomarker differentiators (CD183++/CD227- for PT, CD227+ for DT)
+
+Format the output as a clean markdown document starting with "BACKGROUND KNOWLEDGE: CROSS-MODAL ALIGNMENT & CONFLICT RESOLUTION".

@@ -1,0 +1,45 @@
+Extract and organize key information from the DataAnalyst report to support Deep Literature Review.
+
+**DataAnalyst Report:**
+```
+{{ data_report }}
+```
+
+**Hypothesis:**
+{{ hypothesis_description }}
+
+**Your Task:**
+Extract the following structured information from the report above:
+
+1. **Biomarker List**: Identify all biomarkers mentioned in the dataset
+   - Focus on markers relevant to kidney disease, fibrosis, inflammation
+   - Return as a list
+
+2. **Cell Type List**: Identify all cell types available in the dataset
+   - Include tissue structures (e.g., Proximal Tubules, Glomeruli)
+   - Return as a list
+
+3. **Key Concepts**: Extract 5-10 biological concepts from the hypothesis
+   - Focus on mechanisms (e.g., "proximal tubule atrophy", "fibrosis progression")
+   - Focus on disease context (e.g., "diabetic kidney disease", "DKD")
+   - Return as a list
+
+**Response Format (JSON only):**
+```json
+{
+  "biomarker_list": ["ACE2", "TFAM", "Clusterin", "aSMA", "CollagenIV", ...],
+  "cell_type_list": ["Proximal Tubules", "Distal Tubules", "Macrophages", ...],
+  "key_concepts": [
+    "proximal tubule atrophy and loss",
+    "fibrosis marker upregulation",
+    "diabetic kidney disease progression",
+    "spatial coupling of tubular damage and fibrosis",
+    "hidden damage in late-stage tubules"
+  ]
+}
+```
+
+**IMPORTANT:**
+- Return ONLY valid JSON, no additional text
+- If information is not available in the report, use empty lists
+- Ensure all JSON syntax is valid

@@ -1,0 +1,34 @@
+{
+  "fixture_name": "reference_pipeline_snapshot",
+  "snapshot_type": "real_pipeline_lightweight_fixture",
+  "created_for": "mock_mode_display_and_output_copy",
+  "included_files": [
+    "analysis_report.md",
+    "literature_query.md",
+    "literature_report.md",
+    "blueprint.json",
+    "VisualProfiler_checklist.md",
+    "OmicsProfiler_checklist.md",
+    "OmicsInterpreter_checklist.md",
+    "interpretation/reg009_1765-1893-3696-3824/visual_report.json",
+    "interpretation/reg009_1765-1893-3696-3824/omics_report.json",
+    "interpretation/reg009_1765-1893-3696-3824/final_interpretation.json",
+    "interpretation/reg009_1893-2021-2352-2480/visual_report.json",
+    "interpretation/reg009_1893-2021-2352-2480/omics_report.json",
+    "interpretation/reg009_1893-2021-2352-2480/final_interpretation.json",
+    "validation_report.md",
+    "validation_results.json",
+    "retriever_queries.json",
+    "display_summary.json"
+  ],
+  "excluded_paths": [
+    {
+      "path": "api_calls/",
+      "reason": "Raw API payload logs are debug artifacts and include large visual request payloads."
+    },
+    {
+      "path": "session_metadata.json",
+      "reason": "Mock runs generate fresh session metadata for each execution."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+Based on the following context, generate an OmicsProfiler Background Checklist for analyzing cell composition of kidney tissue structures.
+
+## Context
+**Hypothesis:** {{ hypothesis_description }}
+
+**Dataset:** {{ dataset_context }}
+
+**Literature:** {{ literature_context }}
+
+## Task
+Generate a cell composition checklist for these tissue structures:
+
+- Proximal tubules
+- Distal tubules
+- Glomeruli
+- Blood vessel
+- Interstitium
+
+For each structure, specify:
+- **Enriched**: Cell types and their key biomarkers that are highly expressed (e.g., "Tubular cells (CD183++/CD227-)")
+- **Sparse**: Cell types and biomarkers that are lowly expressed or absent
+
+Use these known biomarkers where relevant: CD183, CD227, CD31, CD196, Nestin, aSMA, CD45, CD68, CD11b.
+
+Format the output as a clean markdown document.

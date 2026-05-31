@@ -1,0 +1,109 @@
+Design a statistical verification blueprint for this hypothesis:
+
+Hypothesis ID: {{ hypothesis_id }}
+
+Hypothesis:
+{{ hypothesis_description }}
+
+Data Context:
+{{ data_context }}
+
+Task:
+Create a rigorous verification blueprint that will be used to statistically test this hypothesis.
+
+Requirements:
+1. Extract 3-5 quantifiable target variables strictly derived from the hypothesis.
+2. Define a topology-aware statistical DAG that dynamically routes tests based on the data structure (e.g., hierarchical nesting, distribution assumptions, and hypothesis type).
+3. Specify the multiple testing correction method (default: FDR-BH with alpha=0.05).
+4. Ensure the blueprint is complete, mathematically sound, and designed to prevent pseudoreplication.
+
+## Blueprint Components:
+
+### 1. Cohort Definition
+Define the inclusion criteria, the ordinal or categorical stages, and explicitly state the hierarchical nesting structure of the dataset based on the Data Context.
+
+### 2. Target Variables
+Extract measurable features. For each, define:
+- Type (e.g., marker_expression, cellular_composition)
+- Biological proxy (what it represents)
+- Expected trend (e.g., monotonic_increase, monotonic_decrease, significant_difference)
+- Measurement method
+
+### 3. Statistical DAG Design Logic
+Design a robust, heuristic-driven statistical execution graph. You must autonomously evaluate the data context and choose the appropriate statistical engine:
+- Data Topology: Evaluate for hierarchical nesting (e.g., technical replicates like ROIs nested within biological replicates like Patients). If pseudoreplication is a risk, you MUST incorporate methods that partition intra-class correlation (e.g., Linear Mixed Models, robust standard errors, or pseudobulk aggregation).
+- Assumptions & Fallbacks: Always define a fallback routing (e.g., non-parametric tests, pseudobulk) if primary model assumptions or convergence fail.
+
+## Output Format:
+Respond ONLY with valid JSON matching this schema:
+
+{
+  "metadata": {
+    "blueprint_version": "2.0",
+    "execution_mode": "autonomous_validation",
+    "target_dataset": "{{ dataset_id }}",
+    "generated_at": "<ISO_TIMESTAMP>"
+  },
+  "hypothesis": {
+    "id": "<hypothesis_id>",
+    "statement": "<full hypothesis text>"
+  },
+  "cohort_definition": {
+    "inclusion_criteria": "<criteria>",
+    "ordinal_stages": { "<Stage1>": 0, "<Stage2>": 1 },
+    "nesting_structure": "<description of hierarchical nesting, e.g., ROIs nested in Patients>"
+  },
+  "target_variables": [
+    {
+      "name": "<variable_name>",
+      "type": "<type>",
+      "biological_proxy": "<measurable_feature>",
+      "expected_trend": "<trend>",
+      "measurement_method": "<how_to_measure>"
+    }
+  ],
+  "statistical_dag": {
+    "nodes": [
+      {
+        "id": "node_01_ingestion",
+        "type": "data_extraction",
+        "method": "<extraction_method>",
+        "parameters": {}
+      },
+      {
+        "id": "node_02_topology_audit",
+        "type": "assumption_check",
+        "method": "hierarchical_nesting_audit",
+        "parameters": { "biological_replicate_id": "<id>", "technical_replicate_id": "<id>" },
+        "input": "node_01_ingestion"
+      },
+      {
+        "id": "node_03_primary_engine",
+        "type": "statistical_test",
+        "method": "<dynamically_selected_method_based_on_context>",
+        "parameters": { "<param_1>": "<value>" },
+        "input": "<previous_node_id>"
+      },
+      {
+        "id": "node_04_fallback_engine",
+        "type": "statistical_test",
+        "method": "<dynamically_selected_fallback_method>",
+        "parameters": {},
+        "input": "<previous_node_id>"
+      }
+    ],
+    "routing_logic": [
+      {
+        "from": "<node_id>",
+        "to": "<node_id>",
+        "condition": "<explicit_logical_condition, e.g., convergence_warning == False>"
+      }
+    ]
+  },
+  "multiple_testing_correction": {
+    "method": "fdr_bh",
+    "alpha": 0.05
+  }
+}
+
+Ensure the JSON is valid and complete. Do not include markdown formatting or explanatory text outside the JSON.

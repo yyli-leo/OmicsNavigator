@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "blueprint_version": "2.0",
+    "execution_mode": "autonomous_validation",
+    "target_dataset": "s255"
+  },
+  "hypothesis": {
+    "id": "H1",
+    "statement": "Verify if DKD progression is characterized by a quantifiable loss of functional Proximal Tubules and a concurrent upregulation of Fibrosis Markers (CollagenIV, aSMA), specifically looking for hidden damage in late-stage tubules."
+  },
+  "cohort_definition": {
+    "inclusion_criteria": "Samples with annotated DKD stages, segmented Proximal Tubule (PT) cells, and quantified expression matrices for CollagenIV and aSMA.",
+    "ordinal_stages": {
+      "Healthy_Control": 0,
+      "Early_DKD": 1,
+      "Late_DKD": 2
+    },
+    "nesting_structure": "Individual cells are nested within Fields of View (ROIs), which are hierarchically nested within Patient IDs (biological replicates)."
+  },
+  "target_variables": [
+    {
+      "name": "proximal_tubule_density",
+      "type": "cellular_composition",
+      "biological_proxy": "Functional Proximal Tubule abundance",
+      "expected_trend": "monotonic_decrease",
+      "measurement_method": "Proportion of cells annotated as Proximal Tubules per ROI"
+    },
+    {
+      "name": "collagen_IV_expression",
+      "type": "marker_expression",
+      "biological_proxy": "Extracellular matrix deposition / Fibrosis",
+      "expected_trend": "monotonic_increase",
+      "measurement_method": "Mean fluorescence intensity or normalized transcript count of COL4A1 per ROI"
+    },
+    {
+      "name": "aSMA_expression",
+      "type": "marker_expression",
+      "biological_proxy": "Myofibroblast activation / Interstitial Fibrosis",
+      "expected_trend": "monotonic_increase",
+      "measurement_method": "Mean fluorescence intensity or normalized transcript count of ACTA2 per ROI"
+    },
+    {
+      "name": "pt_hidden_damage_signature",
+      "type": "marker_expression",
+      "biological_proxy": "Sub-lethal tubular injury in morphologically intact tubules",
+      "expected_trend": "significant_difference",
+      "measurement_method": "Mean expression of injury markers (e.g., HAVCR1/KIM-1, LCN2) specifically subsetted within surviving Proximal Tubule cells in late-stage vs early-stage"
+    }
+  ],
+  "statistical_dag": {
+    "nodes": [
+      {
+        "id": "node_01_ingestion",
+        "type": "data_extraction",
+        "method": "spatial_omics_matrix_extraction",
+        "parameters": {
+          "extract_cell_types": true,
+          "extract_morphology": false,
+          "genes_of_interest": [
+            "COL4A1",
+            "ACTA2",
+            "HAVCR1",
+            "LCN2"
+          ]
+        }
+      },
+      {
+        "id": "node_02_topology_audit",
+        "type": "assumption_check",
+        "method": "hierarchical_nesting_audit",
+        "parameters": {
+          "biological_replicate_id": "Patient_ID",
+          "technical_replicate_id": "ROI_ID"
+        },
+        "input": "node_01_ingestion"
+      },
+      {
+        "id": "node_03_distribution_check",
+        "type": "assumption_check",
+        "method": "shapiro_wilk_and_levene_test",
+        "parameters": {
+          "alpha": 0.05
+        },
+        "input": "node_02_topology_audit"
+      },
+      {
+        "id": "node_04_primary_engine_lmm",
+        "type": "statistical_test",
+        "method": "linear_mixed_model",
+        "parameters": {
+          "formula": "target_variable ~ DKD_stage + (1 | Patient_ID/ROI_ID)",
+          "family": "gaussian",
+          "optimizer": "bobyqa"
+        },
+        "input": "node_03_distribution_check"
+      },
+      {
+        "id": "node_05_pseudobulk_aggregation",
+        "type": "data_transformation",
+        "method": "aggregate_to_biological_replicate",
+        "parameters": {
+          "aggregation_function": "mean",
+          "grouping_variable": "Patient_ID"
+        },
+        "input": "node_02_topology_audit"
+      },
+      {
+        "id": "node_06_fallback_engine_nonparametric",
+        "type": "statistical_test",
+        "method": "jonckheere_terpstra_test",
+        "parameters": {
+          "alternative": "directional_trend",
+          "permutations": 1000
+        },
+        "input": "node_05_pseudobulk_aggregation"
+      }
+    ],
+    "routing_logic": [
+      {
+        "from": "node_01_ingestion",
+        "to": "node_02_topology_audit",
+        "condition": "always"
+      },
+      {
+        "from": "node_02_topology_audit",
+        "to": "node_03_distribution_check",
+        "condition": "intra_class_correlation > 0.05"
+      },
+      {
+        "from": "node_02_topology_audit",
+        "to": "node_05_pseudobulk_aggregation",
+        "condition": "intra_class_correlation <= 0.05 OR biological_replicates < 5"
+      },
+      {
+        "from": "node_03_distribution_check",
+        "to": "node_04_primary_engine_lmm",
+        "condition": "assumptions_met == True OR sample_size >= 30"
+      },
+      {
+        "from": "node_03_distribution_check",
+        "to": "node_05_pseudobulk_aggregation",
+        "condition": "assumptions_met == False AND sample_size < 30"
+      },
+      {
+        "from": "node_04_primary_engine_lmm",
+        "to": "node_05_pseudobulk_aggregation",
+        "condition": "singular_fit_warning == True OR convergence_warning == True"
+      },
+      {
+        "from": "node_05_pseudobulk_aggregation",
+        "to": "node_06_fallback_engine_nonparametric",
+        "condition": "always"
+      }
+    ]
+  },
+  "multiple_testing_correction": {
+    "method": "fdr_bh",
+    "alpha": 0.05
+  }
+}

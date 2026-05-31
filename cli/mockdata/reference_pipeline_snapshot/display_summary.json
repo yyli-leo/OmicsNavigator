@@ -1,0 +1,170 @@
+{
+  "source_snapshot": "reference_pipeline_snapshot",
+  "sample_id": "s255",
+  "data_analyst": {
+    "sample": "s255",
+    "total_cell_count": 137654,
+    "biomarker_count": 42,
+    "cell_type_count": 11,
+    "top_cell_types": [
+      {
+        "name": "Proximal Tubules",
+        "count": 48910,
+        "percentage": 35.53
+      },
+      {
+        "name": "Distal Tubules",
+        "count": 26057,
+        "percentage": 18.93
+      },
+      {
+        "name": "Endothelial cells",
+        "count": 12909,
+        "percentage": 9.38
+      },
+      {
+        "name": "Basement membrane",
+        "count": 11642,
+        "percentage": 8.46
+      },
+      {
+        "name": "VSMCs",
+        "count": 10557,
+        "percentage": 7.67
+      }
+    ],
+    "marker_dynamic_range": [
+      {
+        "marker": "CollagenIV",
+        "median": 156.78,
+        "p95": 389.12,
+        "max": 789.45
+      },
+      {
+        "marker": "aSMA",
+        "median": 123.34,
+        "p95": 345.67,
+        "max": 612.34
+      },
+      {
+        "marker": "SPP1",
+        "median": 89.56,
+        "p95": 267.89,
+        "max": 489.12
+      }
+    ]
+  },
+  "literature_reviewer": {
+    "query_fields": {
+      "domain_expertise": "Spatial Omics and Kidney Disease Research",
+      "disease_context": "Diabetic Kidney Disease",
+      "mechanistic_question": "What is the spatiotemporal relationship between proximal tubule loss and fibrosis marker upregulation?",
+      "target_microenvironment": "tubulointerstitial compartment"
+    },
+    "takeaways": [
+      "The hypothesis should be evaluated through tubulointerstitial injury rather than glomerular damage alone.",
+      "Functional proximal tubule loss and extracellular matrix expansion are plausible DKD progression axes.",
+      "Fibrosis markers should be tested separately because matrix deposition and myofibroblast activation can diverge."
+    ]
+  },
+  "planner": {
+    "blueprint_version": "2.0",
+    "target_dataset": "s255",
+    "target_variables": [
+      {
+        "name": "proximal_tubule_density",
+        "expected_trend": "monotonic_decrease",
+        "method": "Proportion of cells annotated as Proximal Tubules per ROI"
+      },
+      {
+        "name": "collagen_IV_expression",
+        "expected_trend": "monotonic_increase",
+        "method": "Mean fluorescence intensity or normalized transcript count of COL4A1 per ROI"
+      },
+      {
+        "name": "aSMA_expression",
+        "expected_trend": "monotonic_increase",
+        "method": "Mean fluorescence intensity or normalized transcript count of ACTA2 per ROI"
+      },
+      {
+        "name": "pt_hidden_damage_signature",
+        "expected_trend": "significant_difference",
+        "method": "Mean injury-marker expression subsetted within surviving Proximal Tubule cells"
+      }
+    ],
+    "primary_test": "linear_mixed_model",
+    "fallback_test": "jonckheere_terpstra_test",
+    "multiple_testing_correction": "fdr_bh",
+    "alpha": 0.05
+  },
+  "interpretation": {
+    "roi_examples": [
+      {
+        "roi_key": "('s255_c001_v001_r001_reg009', '1765-1893-3696-3824')",
+        "classification": "Fibrotic Interstitium with Associated Arteriolar Structure",
+        "visual_summary": "Concentric aSMA-positive vascular structure with diffuse interstitial Collagen IV/aSMA signal.",
+        "omics_summary": "24% VSMC/aSMA enrichment and 36% total immune infiltrate support an active inflammatory fibrotic milieu.",
+        "confidence": "High"
+      },
+      {
+        "roi_key": "('s255_c001_v001_r001_reg009', '1893-2021-2352-2480')",
+        "classification": "Intact Proximal Tubule Segment with Early Molecular Stress Signatures",
+        "visual_summary": "Proximal-tubule-like structure with preserved basement membrane and no strong localized aSMA-positive fibrosis.",
+        "omics_summary": "80% proximal tubule signature with immune-related markers including C1QC, C3aR, and PD1.",
+        "confidence": "High"
+      }
+    ]
+  },
+  "retriever": {
+    "database": "FAISS vector index over interpretation reports",
+    "queries": [
+      "proximal tubule cell loss and fibrosis markers CollagenIV aSMA in DKD",
+      "late-stage proximal tubule damage with elevated alpha-SMA and collagen expression",
+      "spatial correlation of proximal tubule degradation and interstitial fibrosis in diabetic kidney disease"
+    ]
+  },
+  "validator": {
+    "conclusion": "FALSIFIED",
+    "confidence": 0.5,
+    "data_source": "full_registry",
+    "validation_rois": 1000,
+    "significant_findings": 2,
+    "total_findings": 4,
+    "correction_method": "fdr_bh",
+    "findings": [
+      {
+        "feature": "proximal_tubule_density",
+        "status": "supported",
+        "test": "Linear Mixed Model",
+        "effect_size": "beta = -3.9270",
+        "p_value": 0.00028218132156280145,
+        "corrected_p_value": 0.0011287252862512058
+      },
+      {
+        "feature": "collagen_IV_expression",
+        "status": "supported",
+        "test": "Linear Mixed Model",
+        "effect_size": "beta = 29.0354",
+        "p_value": 0.001964122443357938,
+        "corrected_p_value": 0.003928244886715876
+      },
+      {
+        "feature": "aSMA_expression",
+        "status": "not_supported",
+        "test": "Linear Mixed Model",
+        "effect_size": "beta = -25.9921",
+        "p_value": 0.05054792864160252,
+        "corrected_p_value": 0.06739723818880336
+      },
+      {
+        "feature": "pt_hidden_damage_signature",
+        "status": "not_supported",
+        "test": "Linear Mixed Model",
+        "effect_size": "beta = -0.2720",
+        "p_value": 0.7071926191055053,
+        "corrected_p_value": 0.7071926191055053
+      }
+    ],
+    "interpretation": "The bundled snapshot supports proximal tubule density loss and Collagen IV increase, but does not support concurrent aSMA upregulation or the proposed late-stage hidden-damage signature."
+  }
+}

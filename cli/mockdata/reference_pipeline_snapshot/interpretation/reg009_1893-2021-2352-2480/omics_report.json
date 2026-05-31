@@ -1,0 +1,4 @@
+{
+  "roi_key": "('s255_c001_v001_r001_reg009', '1893-2021-2352-2480')",
+  "report": "1. Proximal tubules:\n   The ROI is dominated (80%) by cells identified as proximal tubules (CD183++/CD227-), which show high enrichment for the functional marker CD183. The low expression of CollagenIV is consistent with the maintenance of tubular structure in this region.\n\nOther Notable Features:\n- High expression of Nestin suggests potential podocyte-related protein presence or structural remodeling within or adjacent to the tubular area.\n- The presence of various immune-related markers (C1QC, C3aR, PD1) within the proximal tubular cell cluster may indicate early molecular signaling activity despite the high structural integrity."
+}

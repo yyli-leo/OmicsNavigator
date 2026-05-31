@@ -1,0 +1,14 @@
+Real snapshot summary: LiteratureReviewer
+
+Source snapshot: reference_pipeline_snapshot
+Domain: Spatial Omics and Kidney Disease Research
+Disease context: Diabetic Kidney Disease
+Mechanistic question: What is the spatiotemporal relationship between proximal tubule loss and fibrosis marker upregulation?
+
+Conservative takeaways:
+- Evaluate DKD progression through tubulointerstitial injury, not glomerular damage alone.
+- Treat proximal tubule loss and extracellular matrix expansion as separate measurable axes.
+- Test fibrosis markers separately because Collagen IV and aSMA can diverge.
+
+Full literature report:
+cli/mockdata/reference_pipeline_snapshot/literature_report.md

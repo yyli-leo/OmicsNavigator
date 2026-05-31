@@ -1,0 +1,22 @@
+<context>
+{% if background_checklist %}
+{{ background_checklist }}
+{% endif %}
+</context>
+
+<roi_info>
+ROI: {{ roi_patch_name }}
+Location: Region {{ roi_region_id }}
+</roi_info>
+
+<visual_report>
+{{ visual_report }}
+</visual_report>
+
+<omics_report>
+{{ omics_report }}
+</omics_report>
+
+<instruction>
+Please synthesize the evidence from both modalities and provide a final classification following the structure in your system instructions.
+</instruction>

@@ -1,0 +1,27 @@
+Interpret the following pre-computed statistical validation results for this spatial omics hypothesis.
+
+DATA SOURCE:
+✓ Real ROI data from Retriever's spatial expansion was used for validation.
+
+Hypothesis:
+{{ hypothesis_description }}
+
+Statistical Results Summary:
+- Total Tests: {{ total_tests }}
+- Significant (after correction): {{ significant_after_correction }}
+- Aligned with expected trend: {{ aligned_significant }}
+
+Test Results:
+{{ detailed_test_results }}
+
+Interpretation Tasks:
+1. Assess Overall Support: Does the data support the hypothesis?
+2. Apply the Strict Verdict Rubric:
+   - "VERIFIED": ALL target variables are statistically significant (FDR p <= 0.05) AND align with the expected trends.
+   - "PARTIALLY VERIFIED": SOME target variables are significant and aligned, but others failed significance or aligned inversely.
+   - "INCONCLUSIVE": The significant trends directly contradict the biological expectation (e.g., significant decrease when an increase was expected), or the data is highly conflicted.
+   - "FALSIFIED": NO target variables achieved statistical significance (FDR p > 0.05).
+3. Identify Key Findings & Effect Sizes.
+4. Acknowledge Limitations: Focus on sample size, patient-level heterogeneity (ICC), and biological context.
+
+Provide a conservative, statistically rigorous interpretation based strictly on the rubric above. Do not over-interpret marginal results (e.g., p=0.051 is STRICTLY NOT significant).
